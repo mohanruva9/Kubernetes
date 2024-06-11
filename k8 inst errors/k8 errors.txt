@@ -1,0 +1,331 @@
+kubectl describe pod clouddetect-deployment-64bd885fd7-dn77n
+Name:             clouddetect-deployment-64bd885fd7-dn77n
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             <none>
+Labels:           app=cloudser
+                  pod-template-hash=64bd885fd7
+Annotations:      <none>
+Status:           Pending
+IP:
+IPs:              <none>
+Controlled By:    ReplicaSet/clouddetect-deployment-64bd885fd7
+Containers:
+  cloudsercon:
+    Image:      nginx:1.14.2
+    Port:       8080/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     500m
+      memory:  512Mi
+    Requests:
+      cpu:        500m
+      memory:     512Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-dr42p (ro)
+Conditions:
+  Type           Status
+  PodScheduled   False
+Volumes:
+  kube-api-access-dr42p:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Guaranteed
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age    From               Message
+  ----     ------            ----   ----               -------
+  Warning  FailedScheduling  2m59s  default-scheduler  0/1 nodes are available: 1 Insufficient cpu. preemption: 0/1 nodes are available: 1 No preemption victims found for incoming pod.
+  
+  
+  
+
+kubectl exec -it  clouddetect-deployment-8b49b76c5-vkjjj  -- /bin/bash
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+nd): pods "kube-proxy-s7pmj" not found
+ubuntu@ip-172-31-58-21:~$ kubectl describe pod -n kube-system kube-proxy-s7pmj
+Name:                 kube-proxy-s7pmj
+Namespace:            kube-system
+Priority:             2000001000
+Priority Class Name:  system-node-critical
+Service Account:      kube-proxy
+Node:                 ip-172-31-58-21/172.31.58.21
+Start Time:           Sun, 09 Jun 2024 05:53:44 +0000
+Labels:               controller-revision-hash=5dbf89796d
+                      k8s-app=kube-proxy
+                      pod-template-generation=1
+Annotations:          <none>
+Status:               Running
+IP:                   172.31.58.21
+IPs:
+  IP:           172.31.58.21
+Controlled By:  DaemonSet/kube-proxy
+Containers:
+  kube-proxy:
+    Container ID:  containerd://e6861ebbf1f720c933ff916afc099e68461d9d35f36dcc1707e71d424841a09e
+    Image:         registry.k8s.io/kube-proxy:v1.30.1
+    Image ID:      registry.k8s.io/kube-proxy@sha256:a1754e5a33878878e78dd0141167e7c529d91eb9b36ffbbf91a6052257b3179c
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /usr/local/bin/kube-proxy
+      --config=/var/lib/kube-proxy/config.conf
+      --hostname-override=$(NODE_NAME)
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    2
+      Started:      Sun, 09 Jun 2024 07:30:28 +0000
+      Finished:     Sun, 09 Jun 2024 07:31:39 +0000
+    Ready:          False
+    Restart Count:  23
+    Environment:
+      NODE_NAME:   (v1:spec.nodeName)
+    Mounts:
+      /lib/modules from lib-modules (ro)
+      /run/xtables.lock from xtables-lock (rw)
+      /var/lib/kube-proxy from kube-proxy (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-s7zvj (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       False
+  ContainersReady             False
+  PodScheduled                True
+Volumes:
+  kube-proxy:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      kube-proxy
+    Optional:  false
+  xtables-lock:
+    Type:          HostPath (bare host directory volume)
+    Path:          /run/xtables.lock
+    HostPathType:  FileOrCreate
+  lib-modules:
+    Type:          HostPath (bare host directory volume)
+    Path:          /lib/modules
+    HostPathType:
+  kube-api-access-s7zvj:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              kubernetes.io/os=linux
+Tolerations:                 op=Exists
+                             node.kubernetes.io/disk-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/memory-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/network-unavailable:NoSchedule op=Exists
+                             node.kubernetes.io/not-ready:NoExecute op=Exists
+                             node.kubernetes.io/pid-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/unreachable:NoExecute op=Exists
+                             node.kubernetes.io/unschedulable:NoSchedule op=Exists
+Events:
+  Type     Reason   Age                  From     Message
+  ----     ------   ----                 ----     -------
+  Normal   Killing  15m (x16 over 89m)   kubelet  Stopping container kube-proxy
+  Warning  BackOff  31s (x342 over 89m)  kubelet  Back-off restarting failed container kube-proxy in pod kube-proxy-s7pmj_kube-system(80a4400c-89f8-41e5-bdcc-34c22adec9d3
+  
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  kubectl describe pod -n kube-system weave-net-wmqqf
+Name:                 weave-net-wmqqf
+Namespace:            kube-system
+Priority:             2000001000
+Priority Class Name:  system-node-critical
+Service Account:      weave-net
+Node:                 ip-172-31-58-21/172.31.58.21
+Start Time:           Sun, 09 Jun 2024 07:57:10 +0000
+Labels:               controller-revision-hash=584777589
+                      name=weave-net
+                      pod-template-generation=1
+Annotations:          <none>
+Status:               Running
+IP:                   172.31.58.21
+IPs:
+  IP:           172.31.58.21
+Controlled By:  DaemonSet/weave-net
+Init Containers:
+  weave-init:
+    Container ID:  containerd://8b4aa4817a4cced1599baac75ad53aba6486ab63dda2d506219ad619d4c6f7f3
+    Image:         weaveworks/weave-kube:latest
+    Image ID:      docker.io/weaveworks/weave-kube@sha256:35827a9c549c095f0e9d1cf8b35d8f27ae2c76e31bc6f7f3c0bc95911d5accea
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /home/weave/init.sh
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Sun, 09 Jun 2024 09:42:11 +0000
+      Finished:     Sun, 09 Jun 2024 09:42:12 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /host/etc from cni-conf (rw)
+      /host/home from cni-bin2 (rw)
+      /host/opt from cni-bin (rw)
+      /lib/modules from lib-modules (rw)
+      /run/xtables.lock from xtables-lock (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-zj5cq (ro)
+Containers:
+  weave:
+    Container ID:  containerd://494d8e28b092ec21b74106b332259530e4539cc57e2313a652cc8d4ee18477c7
+    Image:         weaveworks/weave-kube:latest
+    Image ID:      docker.io/weaveworks/weave-kube@sha256:35827a9c549c095f0e9d1cf8b35d8f27ae2c76e31bc6f7f3c0bc95911d5accea
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /home/weave/launch.sh
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    137
+      Started:      Sun, 09 Jun 2024 09:41:37 +0000
+      Finished:     Sun, 09 Jun 2024 09:42:09 +0000
+    Ready:          False
+    Restart Count:  15
+    Requests:
+      cpu:      50m
+    Readiness:  http-get http://127.0.0.1:6784/status delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:
+      INIT_CONTAINER:  true
+      HOSTNAME:         (v1:spec.nodeName)
+    Mounts:
+      /host/etc/machine-id from cni-machine-id (ro)
+      /host/var/lib/dbus from dbus (ro)
+      /run/xtables.lock from xtables-lock (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-zj5cq (ro)
+      /weavedb from weavedb (rw)
+  weave-npc:
+    Container ID:   containerd://e68400aa3d04b348441ea01263fb135bc228404faafbdd0348a5a5c5f73c9ab7
+    Image:          weaveworks/weave-npc:latest
+    Image ID:       docker.io/weaveworks/weave-npc@sha256:062832fd25b5e9e16650e618f26bba1409a7b3bf2c3903e1b369d788abc63aef
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Sun, 09 Jun 2024 09:40:15 +0000
+      Finished:     Sun, 09 Jun 2024 09:40:53 +0000
+    Ready:          False
+    Restart Count:  17
+    Requests:
+      cpu:  50m
+    Environment:
+      HOSTNAME:   (v1:spec.nodeName)
+    Mounts:
+      /run/xtables.lock from xtables-lock (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-zj5cq (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       False
+  ContainersReady             False
+  PodScheduled                True
+Volumes:
+  weavedb:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/lib/weave
+    HostPathType:
+  cni-bin:
+    Type:          HostPath (bare host directory volume)
+    Path:          /opt
+    HostPathType:
+  cni-bin2:
+    Type:          HostPath (bare host directory volume)
+    Path:          /home
+    HostPathType:
+  cni-conf:
+    Type:          HostPath (bare host directory volume)
+    Path:          /etc
+    HostPathType:
+  cni-machine-id:
+    Type:          HostPath (bare host directory volume)
+    Path:          /etc/machine-id
+    HostPathType:
+  dbus:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/lib/dbus
+    HostPathType:
+  lib-modules:
+    Type:          HostPath (bare host directory volume)
+    Path:          /lib/modules
+    HostPathType:
+  xtables-lock:
+    Type:          HostPath (bare host directory volume)
+    Path:          /run/xtables.lock
+    HostPathType:  FileOrCreate
+  kube-api-access-zj5cq:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 :NoSchedule op=Exists
+                             :NoExecute op=Exists
+                             node.kubernetes.io/disk-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/memory-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/network-unavailable:NoSchedule op=Exists
+                             node.kubernetes.io/not-ready:NoExecute op=Exists
+                             node.kubernetes.io/pid-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/unreachable:NoExecute op=Exists
+                             node.kubernetes.io/unschedulable:NoSchedule op=Exists
+Events:
+  Type     Reason          Age                   From               Message
+  ----     ------          ----                  ----               -------
+  Normal   Scheduled       106m                  default-scheduler  Successfully assigned kube-system/weave-net-wmqqf to ip-172-31-58-21
+  Normal   Pulled          106m                  kubelet            Successfully pulled image "weaveworks/weave-kube:latest" in 1.919s (1.919s including waiting). Image size: 30922913 bytes.
+  Normal   Started         106m                  kubelet            Started container weave-npc
+  Normal   Created         106m                  kubelet            Created container weave-npc
+  Normal   Pulled          106m                  kubelet            Successfully pulled image "weaveworks/weave-npc:latest" in 1.019s (1.019s including waiting). Image size: 12814011 bytes.
+  Normal   Started         106m (x2 over 106m)   kubelet            Started container weave
+  Normal   Pulled          106m (x2 over 106m)   kubelet            Successfully pulled image "weaveworks/weave-kube:latest" in 115ms (115ms including waiting). Image size: 30922913 bytes.
+  Normal   Created         106m (x2 over 106m)   kubelet            Created container weave
+  Normal   Pulling         106m (x2 over 106m)   kubelet            Pulling image "weaveworks/weave-kube:latest"
+  Normal   Killing         103m                  kubelet            Stopping container weave-npc
+  Normal   SandboxChanged  103m                  kubelet            Pod sandbox changed, it will be killed and re-created.
+  Normal   Started         103m (x2 over 106m)   kubelet            Started container weave-init
+  Normal   Created         103m (x2 over 106m)   kubelet            Created container weave-init
+  Normal   Pulling         103m (x2 over 106m)   kubelet            Pulling image "weaveworks/weave-kube:latest"
+  Normal   Pulled          103m                  kubelet            Successfully pulled image "weaveworks/weave-kube:latest" in 125ms (125ms including waiting). Image size: 30922913 bytes.
+  Normal   Pulling         103m (x2 over 106m)   kubelet            Pulling image "weaveworks/weave-npc:latest"
+  Normal   Killing         101m (x2 over 103m)   kubelet            Stopping container weave
+  Warning  BackOff         86m (x67 over 102m)   kubelet            Back-off restarting failed container weave-npc in pod weave-net-wmqqf_kube-system(ea1aa43e-1f31-4eea-836c-f9eff70a4c57)
+  Warning  BackOff         76m (x114 over 103m)  kubelet            Back-off restarting failed container weave in pod weave-net-wmqqf_kube-system(ea1aa43e-1f31-4eea-836c-f9eff70a4c57)
+  Normal   SandboxChanged  26m                   kubelet            Pod sandbox changed, it will be killed and re-created.
+  Normal   Pulled          26m                   kubelet            Successfully pulled image "weaveworks/weave-kube:latest" in 146ms (146ms including waiting). Image size: 30922913 bytes.
+  Normal   Pulled          25m                   kubelet            Successfully pulled image "weaveworks/weave-kube:latest" in 347ms (347ms including waiting). Image size: 30922913 bytes.
+  Warning  Failed          25m (x2 over 26m)     kubelet            Error: services have not yet been read at least once, cannot construct envvars
+  Normal   Started         25m                   kubelet            Started container weave-init
+  Normal   Pulled          25m                   kubelet            Successfully pulled image "weaveworks/weave-kube:latest" in 123ms (123ms including waiting). Image size: 30922913 bytes.
+  Normal   Created         25m                   kubelet            Created container weave-init
+  Normal   Pulling         25m (x3 over 26m)     kubelet            Pulling image "weaveworks/weave-kube:latest"
+  Normal   Pulling         25m                   kubelet            Pulling image "weaveworks/weave-kube:latest"
+  Normal   Started         25m                   kubelet            Started container weave
+  Normal   Created         25m                   kubelet            Created container weave
+  Normal   Pulled          25m                   kubelet            Successfully pulled image "weaveworks/weave-kube:latest" in 161ms (161ms including waiting). Image size: 30922913 bytes.
+  Normal   Pulling         25m                   kubelet            Pulling image "weaveworks/weave-npc:latest"
+  Normal   Pulled          25m                   kubelet            Successfully pulled image "weaveworks/weave-npc:latest" in 131ms (131ms including waiting). Image size: 12814011 bytes.
+  Normal   Created         25m                   kubelet            Created container weave-npc
+  Normal   Started         25m                   kubelet            Started container weave-npc
+  Warning  Unhealthy       25m (x5 over 25m)     kubelet            Readiness probe failed: Get "http://127.0.0.1:6784/status": dial tcp 127.0.0.1:6784: connect: connection refused
+  Warning  BackOff         47s (x90 over 25m)    kubelet            Back-off restarting failed container weave in pod weave-net-wmqqf_kube-system(ea1aa43e-1f31-4eea-836c-f9eff70a4c57)
