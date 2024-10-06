@@ -66,8 +66,8 @@ kubectl apply -f custom-resources.yaml
 kubeadm token create --print-join-command
 ###
 
-kubeadm join 172.31.93.177:6443 --token 4p2st4.z21zo3mu3sz5txu5 \
-        --discovery-token-ca-cert-hash sha256:4c23a720e586eca0343fdb6fa69912d569e49751710e39139362d79aaced7cdc
+kubeadm join 172.31.93.177:6443 --tokenv \
+        --discovery-token-ca-cert-hash 
 		
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
